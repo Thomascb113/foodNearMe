@@ -22,10 +22,12 @@ export default function foodLanding(props){
 
   const navigation = props.navigation
 
+  const API_KEY = '33b212341ed64ffbbe70c625af7fad27'
+
   const buttonPosition = useRef(new Animated.Value(0))
 
   function cookClicked(){
-    navigation.navigate("Search Recipes", { userName: "Thomas" })
+    navigation.navigate("Search Recipes", { api_key: API_KEY })
   }
 
   return(

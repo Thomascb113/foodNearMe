@@ -6,17 +6,20 @@ import { createAppContainer } from "react-navigation";
 
 import FoodLanding from "../screens/foodLanding"
 import SearchRecipes from "../screens/searchRecipes"
+import ViewRecipe from "../screens/viewRecipe"
 
 const Stack = createStackNavigator();
 const AppContainer = createAppContainer(Stack);
 
-export default function FoodStack(){
+export default function FoodStack(props){
 	
+	const API_KEY = '33b212341ed64ffbbe70c625af7fad27'
 
 	return(
 			<Stack.Navigator>
 				<Stack.Screen name="Food Landing" options={{headerShown: false}} component={FoodLanding} />
 				<Stack.Screen name="Search Recipes" options={{headerShown: false}} component={SearchRecipes} />
+				<Stack.Screen name="View Recipe" options={{headerShown: false}} component={ViewRecipe} />
 			</Stack.Navigator>
 	)
 }
