@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import type {Node} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -13,7 +12,8 @@ import {
   TouchableOpacity,
   TextInput,
   KeyBoardAvoidingView,
-  Image
+  Image,
+  ScrollView,
 } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -22,7 +22,10 @@ import Icon from "react-native-vector-icons/FontAwesome";
 export default function ViewRecipe(props){
   console.log("PROPS: ",props)
   const [key, setKey] = useState(props.route.params.api_key)
+  const item  = props.route.params.item
+  console.log("ITEM: ", item)
 
+  const [foodInfo, setFoodInfo] = useState([])
 
   async function getRecipeInformation(){
     console.log("HEREEEE")
@@ -35,6 +38,8 @@ export default function ViewRecipe(props){
 
       let response = await req.json()
       console.log("HERE: ", response)
+      setFoodInfo(response)
+
     }
     catch(e){
       console.log(e)
@@ -47,9 +52,19 @@ export default function ViewRecipe(props){
   },[])
 
   return(
-    <View style={styles.appScreen}>
-      <Text style={{color: "#000"}}>This is where the recipe info goes</Text>
-    </View>
+    <ScrollView style={styles.appScreen}>
+      <SafeAreaView>
+        <Image
+          source={{uri: item.image}}
+          style={{height: 300, width: "100%"}}
+        />
+        <View style={{width: "100%"}}>
+          <View style={{width: "100%", height: 60}}>
+            <Text>item.title</Text>
+          </View>
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   )
 }
 
@@ -58,7 +73,6 @@ const styles= StyleSheet.create({
   appScreen: {
     flex: 1,
     backgroundColor: "#fff",
-    height: "92%",
     width: "100%"
   },
 })

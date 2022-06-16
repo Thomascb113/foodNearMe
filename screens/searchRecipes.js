@@ -62,16 +62,16 @@ export default function SearchRecipes(props){
 
   const renderSearchResults = (item, index) =>{
     return(
-      <View style={{height: 220, width: 340, marginTop: 10, marginBottom: 10}}>
-        <TouchableOpacity style={{height: "100%", width: "100%", alignItems: "center", justifyContent: "center"}} onPress={() => navigation.navigate("View Recipe", {item: item.item, api_key: key})}>
-            <View style={{position: "absolute", bottom: 10, left: 10, zIndex: 10}}>
-              <Text style={{color: "#000", fontSize: 20, fontWeight: "bold"}}>{item.item.title}</Text>
-            </View>
+      <View style={{height: 220, width: 340, marginTop: 10, marginBottom: 10, borderRadius: 13, borderWidth: 1, borderColor: "#D3D3D3"}}>
+        <TouchableOpacity style={{height: "100%", width: "100%", }} onPress={() => navigation.navigate("View Recipe", {item: item.item, api_key: key})}>
             <Image
               source={{uri: item.item.image}}
-              style={{height: 220, width: 340}}
+              style={{height: "70%", width: "100.6%", borderTopRightRadius: 5, borderTopLeftRadius: 5, borderBottomLeftRadius: 1, borderBottomRightRadius: 1, marginTop: -2, alignSelf: "center"}}
               resizeMode="stretch"
             />
+            <View style={{zIndex: 10}}>
+              <Text style={{color: "#000", fontSize: 16, fontWeight: "bold", marginLeft: 5}}>{item.item.title}</Text>
+            </View>
         </TouchableOpacity>
       </View>
     )
