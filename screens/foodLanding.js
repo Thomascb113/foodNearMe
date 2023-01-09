@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
     height: "92%",
     flexDirection: "row"
   },
@@ -60,10 +59,10 @@ const styles = StyleSheet.create({
   optionButton: {
     height: 100,
     width: 100,
-    backgroundColor: "#bbb",
+    backgroundColor: "white",
     borderRadius: 50,
-    borderWidth: 3,
-    borderColor: "#777",
+    borderWidth: 2,
+    borderColor: "#999",
     alignItems: "center",
     justifyContent: "center"
   },

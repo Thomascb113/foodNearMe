@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import type {Node} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createAppContainer } from "react-navigation";
@@ -17,9 +16,39 @@ export default function FoodStack(props){
 
 	return(
 			<Stack.Navigator>
-				<Stack.Screen name="Food Landing" options={{headerShown: false}} component={FoodLanding} />
-				<Stack.Screen name="Search Recipes" options={{headerShown: false}} component={SearchRecipes} />
-				<Stack.Screen name="View Recipe" options={{headerShown: false}} component={ViewRecipe} />
+				<Stack.Screen 
+					name="Food Landing" 
+					options={{
+						headerShown: false, 
+						headerStyle: {
+							backgroundColor: "transparent"
+						},
+						headerTintColor: "transparent"
+					}} 
+					component={FoodLanding} 
+				/>
+				<Stack.Screen 
+					name="Search Recipes" 
+					options={{
+						headerShown: false,
+						headerStyle: {
+							backgroundColor: "transparent"
+						},
+						headerTintColor: "transparent"
+					}} 
+					component={SearchRecipes} 
+				/>
+				<Stack.Screen 
+					name="View Recipe" 
+					options={{
+						headerShown: false,
+						headerStyle: {
+							backgroundColor: "transparent"
+						},
+						headerTintColor: "transparent"
+					}} 
+					component={ViewRecipe} 
+				/>
 			</Stack.Navigator>
 	)
 }

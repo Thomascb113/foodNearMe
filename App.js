@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import type {Node} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -11,6 +9,7 @@ import {
   FlatList,
   Animated,
   TouchableOpacity,
+  SafeAreaView
 } from 'react-native';
 
 import {
@@ -20,12 +19,19 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import LinearGradient from 'react-native-linear-gradient';
 import Icon from "react-native-vector-icons/FontAwesome";
-import { NavigationContainer } from '@react-navigation/native';
+Icon.loadFont();
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+
+const Drawer = createDrawerNavigator();
 
 
 import FoodStack from "./stacks/FoodStack"
 import AboutStack from "./stacks/AboutStack"
+
+import FoodTabs from "./tabs/FoodTabs"
 
 export default function App(){
 
@@ -39,7 +45,7 @@ export default function App(){
   const allTabOptions = [
     {
       option: "Food",
-      icon: "food",
+      icon: "burger",
       index: 0,
     },
     {
@@ -106,49 +112,41 @@ export default function App(){
     )
   }
 
+  const AppTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: 'transparent'
+    },
+  };
+
   return(
-    <View style={{backgroundColor: "#fff", height: "100%", width: "100%"}}>
-
-      <View style={styles.navBar}>
-        <Icon name="bars" size={30} color="#444" style={{paddingLeft: 10}} onPress={() => toggleSideNavbar()}/>
-      </View>
-      <View style={styles.appScreen}>
-          <NavigationContainer>
-            {
-              selectedScreen==="Food" ?
-              <FoodStack />
-              :
-              selectedScreen==="About" ?
-              <AboutStack />
-              :
-              null
-            }
+    <LinearGradient colors={['#2EAAFA', '#8C04DB']} style={{ flex: 1, height: "100%", width: "100%" }}>
+      <SafeAreaView style={{backgroundColor: null, height: "100%", width: "100%", flex: 1}}>
+          <NavigationContainer theme={AppTheme}>
+            <Drawer.Navigator theme={AppTheme} initialRouteName="Food Home">
+              <Drawer.Screen 
+                name="Food Home" 
+                options={{ 
+                  headerStyle: {
+                    backgroundColor: "tranparent"
+                  } 
+                }} 
+                component={FoodTabs} 
+              />
+              <Drawer.Screen 
+                name="About" 
+                component={AboutStack} 
+                options={{ 
+                  headerStyle: {
+                    backgroundColor: "tranparent"
+                  } 
+                }} 
+              />
+            </Drawer.Navigator>
           </NavigationContainer>
-      </View>
-
-      <Animated.View style={[styles.sideNavbarContainer, {width: navBarPosition}]}>
-
-        <View style={{height: 60, width: "100%", justifyContent: "center"}}>
-          <Icon name="arrow-left" size={30} style={{paddingLeft: 10}} color="#000" onPress={() => toggleSideNavbar()}/>
-        </View>
-
-        <View style={{width: "100%"}}>
-          <View style={styles.tabButtonContainer}>
-
-            <FlatList
-              data={allTabOptions}
-              renderItem={({item}) => renderOptionsList(item)}
-              keyExtractor={(item) => item.index}
-            />
-
-          </View>
-
-          <Animated.View style={[styles.slidingAnimationBar, {top: slidingBarPosition}]}></Animated.View>
-
-        </View>
-      </Animated.View>
-      
-    </View>
+      </SafeAreaView>
+    </LinearGradient>
   )
 }
 
@@ -160,7 +158,7 @@ const styles = StyleSheet.create({
   },
 
   appScreen: {
-    height: "92%",
+    height: "100%",
     backgroundColor: "#BBB"
   },
 
